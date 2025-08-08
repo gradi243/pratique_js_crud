@@ -92,7 +92,62 @@
                 }
             })
 
+            
         })
+
+        function miseAjour(){
+                //pour la suppression
+                $(".btn-danger").click(function(){
+                    $(this).closest("tr").remove();
+
+                })
+
+                 $(".btn-primary").click(function (){
+                    //modifier une ligne selectionne
+                     var ligneselectionnne=$(this).closest("tr");
+                    // ici pour recupere la valeur de la ligne selectionne
+                    var ID =ligneselectionnne.find("th").text();
+                    var categorie=ligneselectionnne.find("td:eq(0)").text();
+
+                    //remplire le formulaire
+                    $("#id").val(ID);
+                    $("#categorie").val(categorie);
+
+                    //surppremie l'ancienne ligne apres avoir clique sur modifier
+                    ligneselectionnne.remove();
+
+                 })
+            }
+
+            // Appelle la fonction après ajout d'une ligne
+            $("#ajouterEntree").click(function () {
+                var nouveauId = $("#id").val();
+                var nouvelleCategorie = $("#categorie").val();
+               
+
+                if (nouveauId && nouvelleCategorie) {
+                    var nouvelleLigne = `
+                        <tr>
+                            <th scope="row">${nouveauId}</th>
+                            <td>${nouvelleCategorie}</td>
+                           
+                            <td><button class="btn btn-sm btn-primary">Modifier</button></td>
+                            <td><button class="btn btn-sm btn-danger">Supprimer</button></td>
+                        </tr>
+                    `;
+
+                    $("#tableau-corps").append(nouvelleLigne);
+                    $("#ajoutForm")[0].reset();
+
+                    // Appelle la fonction pour réactiver les boutons pour la mise à jours
+                    miseAjour();
+                } else {
+                    alert("Veuillez remplir tous les champs.");
+                }
+            });
+
+            // Active les boutons pour les lignes existantes
+            miseAjour();
     </script>
 </body>
 </html>
