@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+</head>
+<body>
+    <div class="row m-3">
+        <div class="col-lg-4 ">
+            <div class="card p-3 ">
+                <div class="card-header">
+                    <h2>AJOUTE UNE CATECOGRIE</h2>
+                </div>
+                <div class="body">
+                   <form action="" method="" id="ajoutForm">
+                     <div class="mb-3" >
+                        <label class="form-label">ID</label>
+                        <input type="number" class="form-control" name="id" id="id">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="categorie">Categorie</label>
+                        <input class="form-control" id="categorie" type="text">
+                    </div>
+
+                    <div class="btn">
+                         <button type="button" class="btn btn-primary" id="ajouterEntree">Ajouter</button>
+                    </div>
+                   </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card">
+                <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Catégorie</th>                   
+                    <th scope="col">Modifier</th>
+                    <th scope="col">Supprimer</th>
+                </tr>
+            </thead>
+            <tbody id="tableau-corps">
+                <tr>
+                   
+                </tr>
+               
+            </tbody>
+        </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="bootstrap/js/bootstrap.js"></script>
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script >
+        // cette fonction s'execute une fois le formulaire est charge
+        $(document).ready(function(){
+
+            //creation d'une fonction qui nous permettre d'ajoute en cliquant sur le bouton ajoute, cela s exeute avec une fonction js click
+            $('#ajouterEntree').click(function(){
+
+                //recupere la valeur saisi par l utilisateur
+                var ID =$("#id").val();
+                var Categorie =$("#categorie").val();
+
+                //verification de champs 
+                if (ID && Categorie) {
+
+                    var ajoutetable=`
+                        <tr>
+                            <th scope="row">${ID}</th>
+                            <td>${Categorie}</td> 
+                            <td><button class="btn btn-sm btn-primary">Modifier</button></td>
+                            <td><button class="btn btn-sm btn-danger">Supprimer</button></td>
+                        </tr>
+                    `;
+
+                    //affiche une nouvelle ligne ajoute
+                    $("#tableau-corps").append(ajoutetable);
+                    $("#ajoutForm")[0].reset();
+                        
+                }
+
+                 else {
+    
+                    // ...affiche une boîte d'alerte dans le navigateur informant l'utilisateur de remplir tous les champs.
+                    alert("Veuillez remplir tous les champs.");
+                }
+            })
+
+        })
+    </script>
+</body>
+</html>
